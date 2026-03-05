@@ -1,4 +1,8 @@
-# Ingestion Layer — Drop-In Contract
+# Ingestion Layer — Drop-In Contract (Legacy)
+
+> **Note:** This folder supports the **legacy local PAX pipeline**. The primary ingestion path is now the
+> **Azure Durable Functions pipeline** (`pipeline/`), which calls Graph API directly from Azure Functions
+> with zero local execution. See the [root README](../README.md) for details.
 
 This folder is the **drop zone for modified PAX PowerShell scripts**. Scripts placed here are the versions that have been modified by the PAX solution's AI to support Insight Harbor's config-file-driven, ADLS-aware pipeline.
 

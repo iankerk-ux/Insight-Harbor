@@ -2,7 +2,7 @@
 
 > **Version:** 1.1  
 > **Date:** 2025-07-08 (Updated: 2025-07-09)  
-> **Status:** DRAFT — Pending Review (Appendix C added: PAX Intelligence Gap Analysis)  
+> **Status:** IMPLEMENTED — Pipeline deployed and running in Azure (ih-pipeline-func01)  
 > **Scope:** Replace the local PAX PowerShell pipeline with a zero-local-storage Azure Durable Functions pipeline
 
 ---

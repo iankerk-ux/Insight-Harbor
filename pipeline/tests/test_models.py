@@ -4,7 +4,7 @@ Tests for pipeline.shared.models
 
 import pytest
 
-from pipeline.shared.models import (
+from shared.models import (
     NotificationPayload,
     Partition,
     PartitionResult,

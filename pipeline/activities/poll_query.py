@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import logging
 
-from pipeline.shared.graph_client import GraphClient
+from shared.graph_client import GraphClient
 
 logger = logging.getLogger("ih.activity.poll_query")
 

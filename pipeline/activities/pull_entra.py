@@ -15,15 +15,15 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timezone
 
-from pipeline.shared.adls_client import ADLSClient
-from pipeline.shared.config import config
-from pipeline.shared.constants import ENTRA_USER_SELECT_FIELDS
-from pipeline.shared.entra_transforms import (
+from shared.adls_client import ADLSClient
+from shared.config import config
+from shared.constants import ENTRA_USER_SELECT_FIELDS
+from shared.entra_transforms import (
     entra_rows_to_csv,
     parse_snapshot_date,
     transform_entra_from_graph,
 )
-from pipeline.shared.graph_client import GraphClient
+from shared.graph_client import GraphClient
 
 logger = logging.getLogger("ih.activity.pull_entra")
 

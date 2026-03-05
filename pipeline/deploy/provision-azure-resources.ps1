@@ -166,16 +166,17 @@ if (-not $SkipRoleAssignments) {
 Write-Host ""
 Write-Host "[6/6] Configuring Function App settings..." -ForegroundColor Yellow
 
-# Key Vault reference for client secret
-$kvSecretRef = "@Microsoft.KeyVault(SecretUri=https://${KeyVaultName}.vault.azure.net/secrets/InsightHarbor-PAX-ClientSecret/)"
+# Key Vault reference — set separately because az.cmd (CMD batch wrapper) chokes
+# on the parentheses in the reference URI. We call the CLI Python exe directly.
+$kvSecretRef = "@Microsoft.KeyVault(SecretUri=https://${KeyVaultName}.vault.azure.net/secrets/IH-CLIENT-SECRET/)"
 
+# 6a — Bulk-set all safe settings (no special CMD characters)
 az functionapp config appsettings set `
     --name $FunctionAppName `
     --resource-group $ResourceGroup `
     --settings `
         "IH_TENANT_ID=$TenantId" `
         "IH_CLIENT_ID=$ClientId" `
-        "IH_CLIENT_SECRET=$kvSecretRef" `
         "IH_ADLS_ACCOUNT_NAME=$ADLSAccountName" `
         "IH_ADLS_CONTAINER=$ADLSContainer" `
         "IH_DEFAULT_LOOKBACK_DAYS=1" `
@@ -194,6 +195,20 @@ az functionapp config appsettings set `
         "IH_EXCLUDE_COPILOT_INTERACTION=false" `
         "IH_AUTO_COMPLETENESS=false" `
         "APPLICATIONINSIGHTS_CONNECTION_STRING=$appInsightsConnStr" `
+    --output none
+
+# 6b — Set the Key Vault reference via CLI Python directly (bypasses az.cmd
+#       batch wrapper which fails on parentheses in the KV reference URI).
+$azCli = (Get-Command az).Source
+$azPython = Join-Path (Split-Path $azCli) "python.exe"
+if (-not (Test-Path $azPython)) {
+    # Fallback: resolve from wbin symlink
+    $azPython = Join-Path (Split-Path (Split-Path $azCli)) "python.exe"
+}
+& $azPython -IBm azure.cli functionapp config appsettings set `
+    --name $FunctionAppName `
+    --resource-group $ResourceGroup `
+    --settings "IH_CLIENT_SECRET=$kvSecretRef" `
     --output none
 
 Write-Host "  All IH_* settings configured" -ForegroundColor Green

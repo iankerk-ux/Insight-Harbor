@@ -6,8 +6,8 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from pipeline.shared.models import Partition
-from pipeline.shared.partitioning import (
+from shared.models import Partition
+from shared.partitioning import (
     compute_date_range,
     generate_partitions,
     should_subdivide,

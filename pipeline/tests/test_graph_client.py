@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from pipeline.shared.graph_client import GraphClient, PermanentError, ThrottledError
+from shared.graph_client import GraphClient, PermanentError, ThrottledError
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

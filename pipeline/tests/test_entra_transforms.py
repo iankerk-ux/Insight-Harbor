@@ -4,7 +4,7 @@ Tests for pipeline.shared.entra_transforms
 
 import pytest
 
-from pipeline.shared.entra_transforms import (
+from shared.entra_transforms import (
     build_column_map,
     compute_license_tier,
     entra_rows_to_csv,
@@ -14,7 +14,7 @@ from pipeline.shared.entra_transforms import (
     transform_entra_from_graph,
     transform_entra_row,
 )
-from pipeline.shared.constants import ENTRA_SOURCE_TO_SILVER
+from shared.constants import ENTRA_SOURCE_TO_SILVER
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

@@ -19,7 +19,7 @@ import logging
 import azure.durable_functions as df
 import azure.functions as func
 
-from pipeline.shared.config import config
+from shared.config import config
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # App Initialization
@@ -128,7 +128,7 @@ async def pipeline_status(req: func.HttpRequest, client):
 @app.orchestration_trigger(context_name="context")
 def pipeline_orchestrator(context: df.DurableOrchestrationContext):
     """Main pipeline orchestrator — registered with Durable Functions."""
-    from pipeline.orchestrators.pipeline_orchestrator import (
+    from orchestrators.pipeline_orchestrator import (
         pipeline_orchestrator as _impl,
     )
 
@@ -138,7 +138,7 @@ def pipeline_orchestrator(context: df.DurableOrchestrationContext):
 @app.orchestration_trigger(context_name="context")
 def process_partition(context: df.DurableOrchestrationContext):
     """Sub-orchestrator for single partition processing."""
-    from pipeline.orchestrators.process_partition import (
+    from orchestrators.process_partition import (
         process_partition as _impl,
     )
 
@@ -153,7 +153,7 @@ def process_partition(context: df.DurableOrchestrationContext):
 @app.activity_trigger(input_name="inputData")
 def plan_partitions(inputData: dict) -> dict:
     """Plan time partitions for the pipeline run."""
-    from pipeline.activities.plan_partitions import plan_partitions as _impl
+    from activities.plan_partitions import plan_partitions as _impl
 
     return _impl(inputData)
 
@@ -161,7 +161,7 @@ def plan_partitions(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def create_query(inputData: dict) -> dict:
     """Create a Graph API audit query."""
-    from pipeline.activities.create_query import create_query as _impl
+    from activities.create_query import create_query as _impl
 
     return _impl(inputData)
 
@@ -169,7 +169,7 @@ def create_query(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def poll_query(inputData: dict) -> dict:
     """Poll a Graph API audit query status."""
-    from pipeline.activities.poll_query import poll_query as _impl
+    from activities.poll_query import poll_query as _impl
 
     return _impl(inputData)
 
@@ -177,7 +177,7 @@ def poll_query(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def fetch_records(inputData: dict) -> dict:
     """Fetch records from a completed query and stream to ADLS."""
-    from pipeline.activities.fetch_records import fetch_records as _impl
+    from activities.fetch_records import fetch_records as _impl
 
     return _impl(inputData)
 
@@ -185,7 +185,7 @@ def fetch_records(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def check_subdivision(inputData: dict) -> dict:
     """Check if a partition needs subdivision based on record count."""
-    from pipeline.activities.check_subdivision import check_subdivision as _impl
+    from activities.check_subdivision import check_subdivision as _impl
 
     return _impl(inputData)
 
@@ -193,7 +193,7 @@ def check_subdivision(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def cleanup_queries(inputData: dict) -> dict:
     """Delete a completed audit query to free the slot."""
-    from pipeline.activities.cleanup_queries import cleanup_queries as _impl
+    from activities.cleanup_queries import cleanup_query as _impl
 
     return _impl(inputData)
 
@@ -201,7 +201,7 @@ def cleanup_queries(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def explode_partition(inputData: dict) -> dict:
     """Explode a raw JSONL partition into 153-column CSV."""
-    from pipeline.activities.explode_partition import explode_partition as _impl
+    from activities.explode_partition import explode_partition as _impl
 
     return _impl(inputData)
 
@@ -209,7 +209,7 @@ def explode_partition(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def pull_entra(inputData: dict) -> dict:
     """Fetch Entra users from Graph API, transform, and store."""
-    from pipeline.activities.pull_entra import pull_entra as _impl
+    from activities.pull_entra import pull_entra as _impl
 
     return _impl(inputData)
 
@@ -217,7 +217,7 @@ def pull_entra(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def transform_silver(inputData: dict) -> dict:
     """Bronze-to-Silver transform with Entra enrichment and dedup."""
-    from pipeline.activities.transform_silver import transform_silver as _impl
+    from activities.transform_silver import transform_silver as _impl
 
     return _impl(inputData)
 
@@ -225,7 +225,7 @@ def transform_silver(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def notify_completion(inputData: dict) -> dict:
     """Send Teams webhook notification."""
-    from pipeline.activities.notify import notify_completion as _impl
+    from activities.notify import notify_completion as _impl
 
     return _impl(inputData)
 
@@ -233,7 +233,7 @@ def notify_completion(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def update_run_state(inputData: dict) -> dict:
     """Update run state in ADLS."""
-    from pipeline.activities.run_state import update_run_state as _impl
+    from activities.run_state import update_run_state as _impl
 
     return _impl(inputData)
 
@@ -241,6 +241,6 @@ def update_run_state(inputData: dict) -> dict:
 @app.activity_trigger(input_name="inputData")
 def finalize_run_state(inputData: dict) -> dict:
     """Finalize run state and write metadata."""
-    from pipeline.activities.run_state import finalize_run_state as _impl
+    from activities.run_state import finalize_run_state as _impl
 
     return _impl(inputData)

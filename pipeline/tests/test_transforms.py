@@ -4,7 +4,7 @@ Tests for pipeline.shared.transforms
 
 import pytest
 
-from pipeline.shared.transforms import (
+from shared.transforms import (
     compute_is_agent,
     compute_prompt_type,
     enrich_row_with_entra,

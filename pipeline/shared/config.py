@@ -30,7 +30,7 @@ class PipelineConfig:
     SCHEDULE_CRON: str = os.getenv("IH_SCHEDULE_CRON", "0 0 2 * * *")
 
     # ── Graph API ───────────────────────────────────────────────────────────
-    GRAPH_API_VERSION: str = os.getenv("IH_GRAPH_API_VERSION", "v1.0")
+    GRAPH_API_VERSION: str = os.getenv("IH_GRAPH_API_VERSION", "beta")
     GRAPH_BASE_URL: str = "https://graph.microsoft.com"
 
     # ── Activity types & filters ────────────────────────────────────────────

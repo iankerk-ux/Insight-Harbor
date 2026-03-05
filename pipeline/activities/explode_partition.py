@@ -14,9 +14,9 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timezone
 
-from pipeline.shared.adls_client import ADLSClient
-from pipeline.shared.config import config
-from pipeline.shared.explosion import (
+from shared.adls_client import ADLSClient
+from shared.config import config
+from shared.explosion import (
     PURVIEW_EXPLODED_HEADER,
     explode_records_from_jsonl,
     rows_to_csv_string,

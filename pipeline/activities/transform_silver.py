@@ -15,12 +15,12 @@ import io
 import logging
 from datetime import datetime, timezone
 
-from pipeline.shared.adls_client import ADLSClient
-from pipeline.shared.config import config
-from pipeline.shared.constants import SILVER_COPILOT_USAGE_FILENAME
-from pipeline.shared.entra_transforms import load_entra_lookup_from_csv
-from pipeline.shared.explosion import PURVIEW_EXPLODED_HEADER
-from pipeline.shared.transforms import (
+from shared.adls_client import ADLSClient
+from shared.config import config
+from shared.constants import SILVER_COPILOT_USAGE_FILENAME
+from shared.entra_transforms import load_entra_lookup_from_csv
+from shared.explosion import PURVIEW_EXPLODED_HEADER
+from shared.transforms import (
     build_silver_columns,
     load_dedup_keys_from_csv,
     rows_to_csv_string,

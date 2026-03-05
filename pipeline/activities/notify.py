@@ -10,8 +10,8 @@ import logging
 
 import httpx
 
-from pipeline.shared.config import config
-from pipeline.shared.models import NotificationPayload
+from shared.config import config
+from shared.models import NotificationPayload
 
 logger = logging.getLogger("ih.activity.notify")
 

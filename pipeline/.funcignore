@@ -1,0 +1,9 @@
+# Exclude test and deployment files from Azure deployment
+tests/
+deploy/
+__pycache__/
+*.pyc
+.pytest_cache/
+local.settings.json
+.venv/
+.env

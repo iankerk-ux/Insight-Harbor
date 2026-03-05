@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import logging
 
-from pipeline.shared.config import config
-from pipeline.shared.graph_client import GraphClient
+from shared.config import config
+from shared.graph_client import GraphClient
 
 logger = logging.getLogger("ih.activity.create_query")
 

@@ -12,10 +12,10 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timezone
 
-from pipeline.shared.adls_client import ADLSClient
-from pipeline.shared.config import config
-from pipeline.shared.models import Partition, PartitionState, RunState
-from pipeline.shared.partitioning import compute_date_range, generate_partitions
+from shared.adls_client import ADLSClient
+from shared.config import config
+from shared.models import Partition, PartitionState, RunState
+from shared.partitioning import compute_date_range, generate_partitions
 
 logger = logging.getLogger("ih.activity.plan_partitions")
 

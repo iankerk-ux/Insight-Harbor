@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from pipeline.shared.explosion import (
+from shared.explosion import (
     PURVIEW_EXPLODED_HEADER,
     _categorize_agent,
     _extract_base_fields,

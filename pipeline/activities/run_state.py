@@ -9,9 +9,9 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timezone
 
-from pipeline.shared.adls_client import ADLSClient
-from pipeline.shared.config import config
-from pipeline.shared.models import PartitionState, RunMetadata, RunState, RunStatus
+from shared.adls_client import ADLSClient
+from shared.config import config
+from shared.models import PartitionState, RunMetadata, RunState, RunStatus
 
 logger = logging.getLogger("ih.activity.run_state")
 
@@ -123,7 +123,7 @@ def finalize_run_state(input_data: dict) -> dict:
         adls.save_run_state(run_id, state.model_dump())
 
     # Write run metadata for analytics
-    from pipeline.shared.constants import EXIT_CODE_MAP
+    from shared.constants import EXIT_CODE_MAP
     metadata = RunMetadata(
         run_id=run_id,
         started_at=input_data.get("started_at", ""),

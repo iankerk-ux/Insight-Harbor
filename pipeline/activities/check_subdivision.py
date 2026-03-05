@@ -13,9 +13,9 @@ from __future__ import annotations
 
 import logging
 
-from pipeline.shared.config import config
-from pipeline.shared.models import Partition
-from pipeline.shared.partitioning import should_subdivide, subdivide_partition
+from shared.config import config
+from shared.models import Partition
+from shared.partitioning import should_subdivide, subdivide_partition
 
 logger = logging.getLogger("ih.activity.check_subdivision")
 

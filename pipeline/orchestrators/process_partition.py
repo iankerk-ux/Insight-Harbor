@@ -105,10 +105,12 @@ def process_partition(ctx: df.DurableOrchestrationContext):
                 subdivision = yield ctx.call_activity(
                     "check_subdivision",
                     {
-                        "start": partition["start"],
-                        "end": partition["end"],
+                        "partition": {
+                            "id": partition_id,
+                            "start": partition["start"],
+                            "end": partition["end"],
+                        },
                         "record_count": record_count,
-                        "partition_id": partition_id,
                     },
                 )
 
